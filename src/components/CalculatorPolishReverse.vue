@@ -38,7 +38,7 @@
             <div class="calc__keyboard__row digit" id="key-7" @click="updateEntry('7')">7</div>
             <div class="calc__keyboard__row digit" @click="updateEntry('8')">8</div>
             <div class="calc__keyboard__row digit" @click="updateEntry('9')">9</div>
-            <div class="calc__keyboard__row operator">
+            <div class="calc__keyboard__row operator" @click="divide">
               <img alt="division" class="icon" :src="division" />
             </div>
           </div>
@@ -49,7 +49,7 @@
             <div class="calc__keyboard__row digit" @click="updateEntry('4')">4</div>
             <div class="calc__keyboard__row digit" @click="updateEntry('5')">5</div>
             <div class="calc__keyboard__row digit" @click="updateEntry('6')">6</div>
-            <div class="calc__keyboard__row operator">
+            <div class="calc__keyboard__row operator" @click="multiply">
               <img alt="multiplication" class="icon" :src="multiplication" />
             </div>
           </div>
@@ -60,7 +60,7 @@
             <div class="calc__keyboard__row digit" @click="updateEntry('1')">1</div>
             <div class="calc__keyboard__row digit" @click="updateEntry('2')">2</div>
             <div class="calc__keyboard__row digit" @click="updateEntry('3')">3</div>
-            <div class="calc__keyboard__row operator">
+            <div class="calc__keyboard__row operator" @click="subtract">
               <img alt="soustraction" class="icon" :src="soustraction" />
             </div>
           </div>
@@ -169,6 +169,27 @@ const add = () => {
   }
 }
 
+const multiply = () => {
+  if (entryList.value.length > 0) {
+    console.log('multiply')
+    entry.value = formatResult(safeMultiply(entry.value, entryList.value[0]))
+  }
+}
+
+const subtract = () => {
+  if (entryList.value.length > 0) {
+    console.log('subtract')
+    // entry.value = formatResult(safeAdd(entry.value, entryList.value[0]))
+  }
+}
+
+const divide = () => {
+  if (entryList.value.length > 0) {
+    console.log('divide')
+    // entry.value = formatResult(safeAdd(entry.value, entryList.value[0]))
+  }
+}
+
 const parseNumber = (value) => {
   return parseFloat(value.replace(',', '.'))
 }
@@ -177,6 +198,13 @@ const safeAdd = (operand1, operand2) => {
   const operand1Value = parseNumber(operand1)
   const operand2Value = parseNumber(operand2)
   const result = operand1Value + operand2Value
+  return result
+}
+
+const safeMultiply = (operand1, operand2) => {
+  const operand1Value = parseNumber(operand1)
+  const operand2Value = parseNumber(operand2)
+  const result = operand1Value * operand2Value
   return result
 }
 
@@ -196,7 +224,6 @@ const formatResult = (value) => {
         if (cleanNb.length < 13) copyValue = `${cleanNb}`
         else copyValue = `${cleanNb}+`
       } else {
-        0.3
         const newValue = copyValue.slice(0, 12)
         const cleanNb = cleanNumberString(newValue)
         if (cleanNb.length < 12) copyValue = `${cleanNb}`
@@ -204,21 +231,10 @@ const formatResult = (value) => {
       }
     } else {
       copyValue = cleanNumberString(copyValue)
-      console.log('ICI copyValue == ', copyValue)
     }
   }
   return copyValue
 }
-
-// if (cleanStrLength > 12) copyValue = copyValue.slice(0, isNegative ? 13 : 12)
-//     const cleanNb = cleanNumberString(copyValue).replace('.', ',')
-//     console.log('AV °°°°°°°°°°°° copyValue == ', copyValue)
-//     console.log('AP °°°°°°°°°°°° cleanNb == ', cleanNb)
-//     if (isNegative && cleanNb.length > 13) {
-//       copyValue = `${cleanNb.slice(0, 13)}+`
-//     } else if (!isNegative && cleanNb.length > 12) {
-//       copyValue = `${cleanNb.slice(0, 12)}+`
-//     } else copyValue = cleanNb
 
 const evaluatePolishNotation = (expression) => {
   const stack = []

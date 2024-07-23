@@ -358,3 +358,110 @@ describe('On click of add button', () => {
     expect(instance.entry).toBe('-0,3')
   })
 })
+
+describe('On click of multiply button', () => {
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(Calculator)
+  })
+
+  it('Clicking the "*" button should have no effect when entryList is empty', () => {
+    const instance = wrapper.vm
+    instance.entry = '24'
+    instance.multiply()
+    expect(instance.entry).toBe('24')
+  })
+
+  it('Should set entry with the result of multiply current entry to the first item in entryList when the "*" button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '24'
+    instance.pushEntry()
+    expect(instance.entryList).toEqual(['24'])
+    instance.multiply()
+    expect(instance.entry).toBe('576')
+  })
+
+  it('Should set entry with the result of multiply flotting number to the first item in entryList when the "+" button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '14,2'
+    instance.pushEntry()
+    expect(instance.entryList).toEqual(['14,2'])
+    instance.multiply()
+    expect(instance.entry).toBe('201,64')
+  })
+
+  it('Should set entry with the negative result of multiply negative flotting number to the first item in entryList when the "+" button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '-14,2'
+    instance.pushEntry()
+    expect(instance.entryList).toEqual(['-14,2'])
+    instance.multiply()
+    expect(instance.entry).toBe('201,64')
+  })
+
+  it('Should set entry with the positive result of multiply negative flotting number to the first item in entryList when the "+" button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '-14,2'
+    instance.pushEntry()
+    instance.updateEntry('10')
+    expect(instance.entryList).toEqual(['-14,2'])
+    instance.multiply()
+    expect(instance.entry).toBe('-142')
+  })
+
+  it('Entry should not contain more than 12 digits after the multiply operation with Integer number', () => {
+    const instance = wrapper.vm
+    instance.entry = '999999999999'
+    instance.entryList = ['999999999999']
+    instance.multiply()
+    expect(instance.entry).toBe('9.999999999+')
+  })
+
+  it('Entry should not contain more than 12 digits after the multiply operation with floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '9,99999999999'
+    instance.entryList = ['9,99999999999']
+    instance.multiply()
+    expect(instance.entry).toBe('99,999999999+')
+  })
+
+  it('Entry should not contain more than 12 digits after the multiply operation with both negative Integer number', () => {
+    const instance = wrapper.vm
+    instance.entry = '-999999999999'
+    instance.entryList = ['-999999999999']
+    instance.multiply()
+    expect(instance.entry).toBe('9.999999999+')
+  })
+
+  it('Entry should not contain more than 12 digits after the multiply operation with positive and negative Integer number', () => {
+    const instance = wrapper.vm
+    instance.entry = '999999999999'
+    instance.entryList = ['-999999999999']
+    instance.multiply()
+    expect(instance.entry).toBe('-9.999999999+')
+  })
+
+  it('Entry should not contain more than 12 digits after the multiply operation with both negative floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '-9,99999999999'
+    instance.entryList = ['-9,99999999999']
+    instance.multiply()
+    expect(instance.entry).toBe('99,999999999+')
+  })
+
+  it('Entry should not contain more than 12 digits after the multiply operation with positive and negative floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '9,99999999999'
+    instance.entryList = ['-9,99999999999']
+    instance.multiply()
+    expect(instance.entry).toBe('-99,999999999+')
+  })
+
+  it('Should push clean result in entry after the multiply operation with positive floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '0,2'
+    instance.entryList = ['0,1']
+    instance.multiply()
+    expect(instance.entry).toBe('0,02')
+  })
+})
