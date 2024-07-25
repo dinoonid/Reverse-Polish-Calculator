@@ -157,7 +157,7 @@ describe('At hasEntryError activate', () => {
     wrapper = mount(Calculator)
   })
 
-  it('Should desactivate hasEntryError, reset entry when click to button "enter"', () => {
+  it('Should deactivate hasEntryError, reset entry when click to button "enter"', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -168,7 +168,7 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  it('Should desactivate hasEntryError, reset entry when click to button ","', () => {
+  it('Should deactivate hasEntryError, reset entry when click to button ","', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -179,7 +179,7 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  it('Should desactivate hasEntryError, set entry with digit value when click to a digit button', () => {
+  it('Should deactivate hasEntryError, set entry with digit value when click to a digit button', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -190,7 +190,7 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  it('Should desactivate hasEntryError, reset entry when click to button plusminus', () => {
+  it('Should deactivate hasEntryError, reset entry when click to button plusminus', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -201,7 +201,7 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  it('Should desactivate hasEntryError, reset entry when click to button add', () => {
+  it('Should deactivate hasEntryError, reset entry when click to button add', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -212,7 +212,7 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  it('Should desactivate hasEntryError, reset entry when click to button subtract', () => {
+  it('Should deactivate hasEntryError, reset entry when click to button subtract', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -223,7 +223,7 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  it('Should desactivate hasEntryError, reset entry when click to button multiply', () => {
+  it('Should deactivate hasEntryError, reset entry when click to button multiply', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -234,7 +234,7 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  it('Should desactivate hasEntryError, reset entry when click to button divide', () => {
+  it('Should deactivate hasEntryError, reset entry when click to button divide', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'
     instance.entryList = ['20', '40']
@@ -245,7 +245,38 @@ describe('At hasEntryError activate', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
-  // Ajouter les tests pour toutes les autres touches
+  it('Should deactivate hasEntryError, reset entry when click to button swap', () => {
+    const instance = wrapper.vm
+    instance.entry = '99999999999+'
+    instance.entryList = ['20', '40']
+    instance.hasEntryError = true
+    instance.processSwap()
+    expect(instance.entry).toBe('0')
+    expect(instance.entryList).toEqual(['20', '40'])
+    expect(instance.hasEntryError).toBe(false)
+  })
+
+  it('Should deactivate hasEntryError, reset entry when click to button percent', () => {
+    const instance = wrapper.vm
+    instance.entry = '99999999999+'
+    instance.entryList = ['20', '40']
+    instance.hasEntryError = true
+    instance.process('percent')
+    expect(instance.entry).toBe('0')
+    expect(instance.entryList).toEqual(['20', '40'])
+    expect(instance.hasEntryError).toBe(false)
+  })
+
+  it('Should deactivate hasEntryError, reset entry when click to button power', () => {
+    const instance = wrapper.vm
+    instance.entry = '99999999999+'
+    instance.entryList = ['20', '40']
+    instance.hasEntryError = true
+    instance.process('power')
+    expect(instance.entry).toBe('0')
+    expect(instance.entryList).toEqual(['20', '40'])
+    expect(instance.hasEntryError).toBe(false)
+  })
 })
 
 describe('On click of plusminus button', () => {
@@ -372,5 +403,176 @@ describe('On click of enter button', () => {
     expect(instance.entry).toBe('222244446666')
     instance.processComaClick()
     expect(instance.entry).toBe('222244446666')
+  })
+})
+
+describe('On click of swap button', () => {
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(Calculator)
+  })
+
+  it('Clicking the swap button has no effect when entryList is empty', () => {
+    const instance = wrapper.vm
+    instance.entry = '60'
+    instance.entryList = []
+    instance.processSwap()
+    expect(instance.entry).toBe('60')
+    expect(instance.entryList).toEqual([])
+  })
+
+  it('Should swap entry with the first item from entryList when the swap button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '60'
+    instance.entryList = ['20', '40']
+    instance.processSwap()
+    expect(instance.entry).toBe('20')
+    expect(instance.entryList).toEqual(['60', '40'])
+  })
+})
+
+describe('On click of percent button', () => {
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(Calculator)
+  })
+
+  it('Clicking the percent button has no effect when entryList is empty', () => {
+    const instance = wrapper.vm
+    instance.entry = '60'
+    instance.entryList = []
+    instance.process('percent')
+    expect(instance.entry).toBe('60')
+    expect(instance.entryList).toEqual([])
+  })
+
+  it('Should set entry to the result after percentage calculation', () => {
+    const instance = wrapper.vm
+    instance.entry = '50'
+    instance.entryList = ['500']
+    instance.process('percent')
+    expect(instance.entry).toBe('250')
+  })
+
+  it('Should remove the first item from entryList after percentage calculation when the percent button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '50'
+    instance.entryList = ['500']
+    instance.process('percent')
+    expect(instance.entry).toBe('250')
+    expect(instance.entryList).toEqual([])
+  })
+
+  it('Should set entry to the clean result after percentage calculation of two positive floating numbers', () => {
+    const instance = wrapper.vm
+    instance.entry = '10,2'
+    instance.entryList = ['362,4']
+    instance.process('percent')
+    expect(instance.entry).toBe('36,9648')
+  })
+
+  it('Should set entry to the clean result after percentage calculation of two negative floating numbers', () => {
+    const instance = wrapper.vm
+    instance.entry = '-10,2'
+    instance.entryList = ['-362,4']
+    instance.process('percent')
+    expect(instance.entry).toBe('36,9648')
+  })
+
+  it('Should set entry to the clean result after percentage calculation of positive floating number and a negative floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '-10,2'
+    instance.entryList = ['362,4']
+    instance.process('percent')
+    expect(instance.entry).toBe('-36,9648')
+  })
+
+  it('Should set entry to the clean result after percentage calculation of negative floating number and a positive floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '10,2'
+    instance.entryList = ['-362,4']
+    instance.process('percent')
+    expect(instance.entry).toBe('-36,9648')
+  })
+})
+
+describe('On click of power button', () => {
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(Calculator)
+  })
+
+  it('Clicking the power button has no effect when entryList is empty', () => {
+    const instance = wrapper.vm
+    instance.entry = '60'
+    instance.entryList = []
+    instance.process('power')
+    expect(instance.entry).toBe('60')
+    expect(instance.entryList).toEqual([])
+  })
+
+  it('Should set entry to the result after power calculation', () => {
+    const instance = wrapper.vm
+    instance.entry = '3'
+    instance.entryList = ['2']
+    instance.process('power')
+    expect(instance.entry).toBe('8')
+  })
+
+  it('Should remove the first item from entryList after power calculation when the power button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '5'
+    instance.entryList = ['4']
+    instance.process('power')
+    expect(instance.entry).toBe('1024')
+    expect(instance.entryList).toEqual([])
+  })
+
+  it('Should set entry to the clean result after power calculation of two negative numbers', () => {
+    const instance = wrapper.vm
+    instance.entry = '2'
+    instance.entryList = ['4']
+    instance.process('power')
+    expect(instance.entry).toBe('16')
+  })
+
+  it('Should set entry to the clean result after power calculation of two negative numbers', () => {
+    const instance = wrapper.vm
+    instance.entry = '-2'
+    instance.entryList = ['-4']
+    instance.process('power')
+    expect(instance.entry).toBe('0,0625')
+  })
+
+  it('Should set entry to the clean result after power calculation of two positive floating numbers', () => {
+    const instance = wrapper.vm
+    instance.entry = '2,4'
+    instance.entryList = ['4,8']
+    instance.process('power')
+    expect(instance.entry).toBe('43,1498181431')
+  })
+
+  it('Should set entry to the clean result after power calculation of two negative floating numbers', () => {
+    const instance = wrapper.vm
+    instance.entry = '-2,4'
+    instance.entryList = ['-4,8']
+    instance.process('power')
+    expect(instance.entry).toBe('NaN')
+  })
+
+  it('Should set entry to the clean result after power calculation of positive floating number and a negative floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '-2,4'
+    instance.entryList = ['4,8']
+    instance.process('power')
+    expect(instance.entry).toBe('0,0231750687')
+  })
+
+  it('Should set entry to the clean result after power calculation of negative floating number and a positive floating number', () => {
+    const instance = wrapper.vm
+    instance.entry = '2,4'
+    instance.entryList = ['-4,8']
+    instance.process('percent')
+    expect(instance.entry).toBe('-0,1152')
   })
 })

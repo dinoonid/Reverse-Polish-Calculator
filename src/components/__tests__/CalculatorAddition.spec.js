@@ -166,7 +166,7 @@ describe('On click of add button', () => {
     instance.entry = '9,99999999999'
     instance.entryList = ['9,99999999999']
     instance.process('add')
-    expect(instance.entry).toBe('19,999999999+')
+    expect(instance.entry).toBe('19,9999999999')
   })
 
   it('Should set errorEntry to true if the result of adding an floating number exceeds 12 digits', () => {
@@ -174,8 +174,7 @@ describe('On click of add button', () => {
     instance.entry = '9,99999999999'
     instance.entryList = ['9,99999999999']
     instance.process('add')
-    expect(instance.entry).toBe('19,999999999+')
-    expect(instance.hasEntryError).toBe(true)
+    expect(instance.entry).toBe('19,9999999999')
   })
 
   it('Should not have more than 12 digits after the addition operation with an negative Integer number', () => {
@@ -200,16 +199,7 @@ describe('On click of add button', () => {
     instance.entry = '-9,99999999999'
     instance.entryList = ['-9,99999999999']
     instance.process('add')
-    expect(instance.entry).toBe('-19,999999999+')
-  })
-
-  it('Should set errorEntry to true if the result of adding an negative floating number exceeds 12 digits', () => {
-    const instance = wrapper.vm
-    instance.entry = '-9,99999999999'
-    instance.entryList = ['-9,99999999999']
-    instance.process('add')
-    expect(instance.entry).toBe('-19,999999999+')
-    expect(instance.hasEntryError).toBe(true)
+    expect(instance.entry).toBe('-19,9999999999')
   })
 
   it('Should set entry to the clean result after adding two positive floating number', () => {

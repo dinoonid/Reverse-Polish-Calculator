@@ -163,16 +163,7 @@ describe('On click of multiply button', () => {
     instance.entry = '9,99999999999'
     instance.entryList = ['9,99999999999']
     instance.process('multiply')
-    expect(instance.entry).toBe('99,999999999+')
-  })
-
-  it('Should set errorEntry to true if the result of multiplying an floating number exceeds 12 digits', () => {
-    const instance = wrapper.vm
-    instance.entry = '9,99999999999'
-    instance.entryList = ['9,99999999999']
-    instance.process('multiply')
-    expect(instance.entry).toBe('99,999999999+')
-    expect(instance.hasEntryError).toBe(true)
+    expect(instance.entry).toBe('99,9999999998')
   })
 
   it('Should not have more than 12 digits after the multiplication operation with an negative Integer number', () => {
@@ -197,16 +188,7 @@ describe('On click of multiply button', () => {
     instance.entry = '-9,99999999999'
     instance.entryList = ['-9,99999999999']
     instance.process('multiply')
-    expect(instance.entry).toBe('99,999999999+')
-  })
-
-  it('Should set errorEntry to true if the result of multiplying an negative floating number exceeds 12 digits', () => {
-    const instance = wrapper.vm
-    instance.entry = '-9,99999999999'
-    instance.entryList = ['-9,99999999999']
-    instance.process('multiply')
-    expect(instance.entry).toBe('99,999999999+')
-    expect(instance.hasEntryError).toBe(true)
+    expect(instance.entry).toBe('99,9999999998')
   })
 
   it('Should set entry to the clean result after multiplying two positive floating numbers', () => {

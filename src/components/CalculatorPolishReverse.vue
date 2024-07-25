@@ -1,95 +1,117 @@
 <template>
   <div class="calc">
     <div class="calc__wrapper">
-      <div class="calc__container">
-        <p>entryList = {{ entryList }}</p>
-        <div class="calc__screen">
-          <div class="calc__screen__dots">
-            <div
-              v-for="n in 33"
-              :key="`dot-${n}`"
-              class="calc__screen__dot"
-              :class="{ active: n < entryList.length }"
-            ></div>
+      <div class="calc__wrapper__screen">
+        <div class="calc__container__screen">
+          <div class="calc__screen">
+            <div class="calc__screen__dots">
+              <div
+                v-for="n in 33"
+                :key="`dot-${n}`"
+                class="calc__screen__dot"
+                :class="{ active: n < entryList.length }"
+              ></div>
+            </div>
+            <div class="calc__screen__secondary" id="secondary-field">
+              {{ nextEntry }}
+            </div>
+            <div class="calc__screen__primary" id="primary-field" :class="{ error: hasEntryError }">
+              {{ entry }}
+            </div>
           </div>
-          <div class="calc__screen__secondary" id="secondary-field">
-            {{ nextEntry }}
-          </div>
-          <div class="calc__screen__primary" id="primary-field" :class="{ error: hasEntryError }">
-            {{ entry }}
-          </div>
-          <p class="calc__screen__desc">
-            CALCULATOR | <span class="calc__screen__info">Polish reverse</span> |
-          </p>
         </div>
-        <div class="calc__keyboard">
-          <div class="calc__keyboard__line">
-            <div class="calc__keyboard__row clear" @click="resetAll">AC</div>
-            <div class="calc__keyboard__row enter" @click="processEnterClick">
-              <img alt="return" class="icon" :src="arrowReturn" />
-              <div class="text">enter</div>
+      </div>
+      <div class="calc__wrapper__keyboard">
+        <div class="calc__container__keyboard">
+          <img alt="screw" class="calc__keyboard__screw" :src="screw" />
+          <img alt="screw" class="calc__keyboard__screw" :src="screw" />
+          <img alt="screw" class="calc__keyboard__screw" :src="screw" />
+          <img alt="screw" class="calc__keyboard__screw" :src="screw" />
+          <!-- <p>entryList = {{ entryList }}</p> -->
+          <div class="calc__keyboard">
+            <div class="calc__keyboard__line">
+              <div class="calc__keyboard__row clear" title="Clear all" @click="resetAll">AC</div>
+              <div class="calc__keyboard__row enter" title="Add number" @click="processEnterClick">
+                <img alt="return" class="icon" :src="arrowReturn" />
+                <img alt="return" class="icon" :src="arrowReturn" />
+                <div class="text">enter</div>
+              </div>
+              <div class="calc__keyboard__row clear" title="Clear number" @click="reset">C</div>
             </div>
-            <div class="calc__keyboard__row clear" @click="reset">C</div>
-          </div>
-          <div class="calc__keyboard__line">
-            <div class="calc__keyboard__row power disabled">
-              <img alt="xy" class="icon" :src="xy" />
+            <div class="calc__keyboard__line">
+              <div class="calc__keyboard__row swap" title="Swap" @click="processSwap">
+                <img alt="swap" class="icon" :src="swap" />
+              </div>
+              <div class="calc__keyboard__row digit" id="key-7" @click="processDigitClick('7')">
+                7
+              </div>
+              <div class="calc__keyboard__row digit" id="key-8" @click="processDigitClick('8')">
+                8
+              </div>
+              <div class="calc__keyboard__row digit" id="key-9" @click="processDigitClick('9')">
+                9
+              </div>
+              <div class="calc__keyboard__row operator" title="Divide" @click="process('divide')">
+                <img alt="division" class="icon" :src="division" />
+              </div>
             </div>
-            <div class="calc__keyboard__row digit" id="key-7" @click="processDigitClick('7')">
-              7
+            <div class="calc__keyboard__line">
+              <div class="calc__keyboard__row option" title="Percent" @click="process('percent')">
+                <img alt="percent" class="icon" :src="percent" />
+              </div>
+              <div class="calc__keyboard__row digit" id="key-4" @click="processDigitClick('4')">
+                4
+              </div>
+              <div class="calc__keyboard__row digit" id="key-5" @click="processDigitClick('5')">
+                5
+              </div>
+              <div class="calc__keyboard__row digit" id="key-6" @click="processDigitClick('6')">
+                6
+              </div>
+              <div
+                class="calc__keyboard__row operator"
+                title="Multiply"
+                @click="process('multiply')"
+              >
+                <img alt="multiplication" class="icon" :src="multiplication" />
+              </div>
             </div>
-            <div class="calc__keyboard__row digit" id="key-8" @click="processDigitClick('8')">
-              8
+            <div class="calc__keyboard__line">
+              <div class="calc__keyboard__row power" title="Power" @click="process('power')">
+                <img alt="xy" class="icon" :src="xy" />
+              </div>
+              <div class="calc__keyboard__row digit" id="key-1" @click="processDigitClick('1')">
+                1
+              </div>
+              <div class="calc__keyboard__row digit" id="key-2" @click="processDigitClick('2')">
+                2
+              </div>
+              <div class="calc__keyboard__row digit" id="key-3" @click="processDigitClick('3')">
+                3
+              </div>
+              <div
+                class="calc__keyboard__row operator"
+                title="Subtract"
+                @click="process('subtract')"
+              >
+                <img alt="soustraction" class="icon" :src="soustraction" />
+              </div>
             </div>
-            <div class="calc__keyboard__row digit" id="key-9" @click="processDigitClick('9')">
-              9
-            </div>
-            <div class="calc__keyboard__row operator disabled" @click="process('divide')">
-              <img alt="division" class="icon" :src="division" />
-            </div>
-          </div>
-          <div class="calc__keyboard__line">
-            <div class="calc__keyboard__row option disabled">
-              <img alt="percent" class="icon" :src="percent" />
-            </div>
-            <div class="calc__keyboard__row digit" id="key-4" @click="processDigitClick('4')">
-              4
-            </div>
-            <div class="calc__keyboard__row digit" id="key-5" @click="processDigitClick('5')">
-              5
-            </div>
-            <div class="calc__keyboard__row digit" id="key-6" @click="processDigitClick('6')">
-              6
-            </div>
-            <div class="calc__keyboard__row operator" @click="process('multiply')">
-              <img alt="multiplication" class="icon" :src="multiplication" />
-            </div>
-          </div>
-          <div class="calc__keyboard__line">
-            <div class="calc__keyboard__row factorial disabled">
-              <img alt="factorial" class="icon" :src="factorial" />
-            </div>
-            <div class="calc__keyboard__row digit" id="key-1" @click="processDigitClick('1')">
-              1
-            </div>
-            <div class="calc__keyboard__row digit" id="key-2" @click="processDigitClick('2')">
-              2
-            </div>
-            <div class="calc__keyboard__row digit" id="key-3" @click="processDigitClick('3')">
-              3
-            </div>
-            <div class="calc__keyboard__row operator" @click="process('subtract')">
-              <img alt="soustraction" class="icon" :src="soustraction" />
-            </div>
-          </div>
-          <div class="calc__keyboard__line">
-            <div class="calc__keyboard__row digit plusminus" @click="togglePositiveNegative">
-              <img alt="addition" class="icon" :src="plusminus" />
-            </div>
-            <div class="calc__keyboard__row zero" id="key-0" @click="processDigitClick('0')">0</div>
-            <div class="calc__keyboard__row digit" @click="processComaClick">,</div>
-            <div class="calc__keyboard__row operator" @click="process('add')">
-              <img alt="addition" class="icon" :src="addition" />
+            <div class="calc__keyboard__line">
+              <div
+                class="calc__keyboard__row digit plusminus"
+                title="Negative number"
+                @click="togglePositiveNegative"
+              >
+                <img alt="addition" class="icon" :src="plusminus" />
+              </div>
+              <div class="calc__keyboard__row zero" id="key-0" @click="processDigitClick('0')">
+                0
+              </div>
+              <div class="calc__keyboard__row digit" @click="processComaClick">,</div>
+              <div class="calc__keyboard__row operator" title="Add" @click="process('add')">
+                <img alt="addition" class="icon" :src="addition" />
+              </div>
             </div>
           </div>
         </div>
@@ -105,10 +127,11 @@ import soustraction from '@/assets/images/soustraction.svg'
 import multiplication from '@/assets/images/multiplication.svg'
 import division from '@/assets/images/division.svg'
 import plusminus from '@/assets/images/plusminus.svg'
-import factorial from '@/assets/images/factorial.svg'
+import swap from '@/assets/images/swap.svg'
 import percent from '@/assets/images/percent.svg'
 import xy from '@/assets/images/xy.svg'
 import arrowReturn from '@/assets/images/return.svg'
+import screw from '@/assets/images/screw.svg'
 
 let entry = ref('0')
 let entryList = ref([])
@@ -130,7 +153,7 @@ const processDigitClick = (digit) => {
       entry.value = entry.value += digit
     }
   } else {
-    if (operationInProgress.value) addEntryToEntryList()
+    if (operationInProgress.value) handleEntryList('add')
     entry.value = digit
     concatMode.value = true
   }
@@ -147,7 +170,7 @@ const processComaClick = () => {
 
   if (isEntryUnderLimit()) {
     if (operationInProgress.value) {
-      addEntryToEntryList()
+      handleEntryList('add')
       entry.value = '0'
       concatMode.value = false
     } else {
@@ -170,13 +193,14 @@ const processEnterClick = () => {
     return
   }
   concatMode.value = false
-  addEntryToEntryList()
+  handleEntryList('add')
 }
 
-const addEntryToEntryList = () => {
+const handleEntryList = (process) => {
   if (entry.value.endsWith(',')) entry.value = entry.value.slice(0, -1)
   entry.value = cleanNumberString(entry.value)
-  entryList.value.unshift(entry.value)
+  if (process === 'add') entryList.value.unshift(entry.value)
+  if (process === 'replace') entryList.value[0] = entry.value
 }
 
 const resetAll = () => {
@@ -192,6 +216,19 @@ const reset = () => {
   concatMode.value = false
   hasEntryError.value = false
   operationInProgress.value = false
+}
+
+const processSwap = () => {
+  if (hasEntryError.value) {
+    reset()
+    return
+  }
+
+  if (entryList.value.length > 0) {
+    const tempFirstEntryListElement = entryList.value[0]
+    handleEntryList('replace')
+    entry.value = tempFirstEntryListElement
+  }
 }
 
 const togglePositiveNegative = () => {
@@ -231,7 +268,9 @@ const safeProcess = (operand1, operand2, type) => {
     add: value1 + value2,
     multiply: value1 * value2,
     subtract: value2 - value1,
-    divide: value2 / value1
+    divide: (value2 * 1000000000000) / (value1 * 1000000000000),
+    percent: (value1 * value2) / 100,
+    power: Math.pow(value2, value1)
   }
   const result = processList[type]
   return result
@@ -250,12 +289,20 @@ const parseNumber = (value) => {
 }
 
 const formatResult = (value) => {
+  console.log('value == ', value)
+  if (value === Infinity || value === -Infinity) {
+    hasEntryError.value = true
+    return '∞'
+  }
+  if (Number.isNaN(value)) {
+    hasEntryError.value = true
+    return 'NaN'
+  }
   const isInteger = Number.isInteger(value)
   const isNegative = value < 0
   let factor = Math.pow(10, 15)
   let copyValue = String(Math.round(value * factor) / factor)
   const cleanStr = copyValue.replace(/[^0-9]/g, '')
-
   const cleanStrLength = cleanStr.length
   if (isInteger) {
     if (cleanStrLength > 12) {
@@ -265,20 +312,18 @@ const formatResult = (value) => {
   } else {
     if (cleanStrLength > 12) {
       if (isNegative) {
+        const newValue = copyValue.slice(0, 14)
+        const cleanNb = cleanNumberString(newValue)
+        if (cleanNb.length < 14) copyValue = `${cleanNb}`
+        else {
+          copyValue = `${cleanNb}`
+        }
+      } else {
         const newValue = copyValue.slice(0, 13)
         const cleanNb = cleanNumberString(newValue)
         if (cleanNb.length < 13) copyValue = `${cleanNb}`
         else {
-          copyValue = `${cleanNb}+`
-          hasEntryError.value = true
-        }
-      } else {
-        const newValue = copyValue.slice(0, 12)
-        const cleanNb = cleanNumberString(newValue)
-        if (cleanNb.length < 12) copyValue = `${cleanNb}`
-        else {
-          copyValue = `${cleanNb}+`
-          hasEntryError.value = true
+          copyValue = `${cleanNb}`
         }
       }
     } else {
@@ -290,10 +335,6 @@ const formatResult = (value) => {
 </script>
 
 <style scoped lang="scss">
-.disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
 .calc {
   display: flex;
   justify-content: center;
@@ -303,19 +344,51 @@ const formatResult = (value) => {
   height: 100vh;
 
   &__wrapper {
-    background-color: #ffffff;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: 24px;
-    border: 1px solid rgba(149, 157, 165, 0.4);
-    padding: 16px;
+    box-shadow: -12px 12px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+    border: 1px solid #959da566;
+    overflow: hidden;
+
+    &__screen {
+      background: linear-gradient(210deg, hsl(0, 0%, 60%), hsl(0, 0%, 0%));
+      padding: 16px 16px 0 16px;
+    }
+
+    &__keyboard {
+      background: linear-gradient(225deg, #ffffff, hsl(212, 12%, 85%));
+      padding: 0 16px 16px 16px;
+    }
   }
 
   &__container {
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    border: 1px solid #eeeeee;
-    padding: 16px;
+    &__screen {
+      position: relative;
+      background-color: hsl(0, 0%, 30%);
+      border-radius: 16px 16px 0 0;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: none;
+      overflow: hidden;
+      padding: 16px 16px 32px 16px;
+    }
+
+    &__keyboard {
+      position: relative;
+      background-color: #ffffff;
+      border-radius: 0 0 16px 16px;
+      border: 1px solid hsl(212, 12%, 80%);
+      border-top: none;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(225deg, #ffffff, hsl(212, 12%, 94%));
+      }
+    }
   }
 
   &__screen {
@@ -325,19 +398,10 @@ const formatResult = (value) => {
     font-weight: 400;
     line-height: 1;
     letter-spacing: 1px;
-    background-color: hsla(160, 67%, 24%, 0.2);
-    border: 1px solid hsla(160, 67%, 24%, 0.2);
+    background: linear-gradient(210deg, hsl(160, 23%, 90%), hsl(160, 23%, 68%));
+    border: 1px solid hsla(160, 67%, 24%, 0.3);
+    box-shadow: -4px 4px 8px inset rgba(0, 0, 0, 0.3);
     padding: 8px 28px 12px 28px;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50px;
-      left: 28px;
-      width: calc(100% - 56px);
-      height: 1px;
-      background-color: hsla(160, 67%, 24%, 0.2);
-    }
 
     &__dots {
       display: flex;
@@ -354,7 +418,6 @@ const formatResult = (value) => {
       &.active {
         position: relative;
         background-color: hsla(160, 30%, 30%);
-        // box-shadow: 0px 0px 1px 1px hsl(160, 100%, 50%, 0.6);
       }
     }
 
@@ -364,7 +427,6 @@ const formatResult = (value) => {
       font-family: 'Fragment Mono', monospace;
       line-height: 42px;
       text-align: right;
-      // text-shadow: 0px 0px 3px hsl(160, 100%, 50%);
 
       &.error {
         color: hsl(0, 80%, 50%, 0.7);
@@ -376,38 +438,46 @@ const formatResult = (value) => {
       font-family: 'Fragment Mono', monospace;
       line-height: 24px;
       text-align: left;
-      // text-shadow: 0px 0px 2px hsl(160, 100%, 50%);
       margin-bottom: 16px;
-    }
-
-    &__desc {
-      position: absolute;
-      left: 0;
-      bottom: -32px;
-      color: #555555;
-      font-size: 11px;
-      font-weight: 400;
-      line-height: 11px;
-      user-select: none;
-    }
-
-    &__info {
-      color: #70b3ff;
-      font-size: 11px;
-      font-weight: 400;
-      font-style: italic;
-      line-height: 11px;
-      letter-spacing: 1px;
     }
   }
 
   &__keyboard {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    border-top: 1px solid #eeeeee;
-    padding: 24px 32px 12px 32px;
-    margin-top: 42px;
+    padding: 28px 48px 28px 48px;
+
+    &__screw {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+
+      &:nth-child(1) {
+        bottom: 10px;
+        right: 10px;
+        transform: rotate(-45deg);
+      }
+
+      &:nth-child(2) {
+        bottom: 10px;
+        left: 10px;
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        bottom: 419px;
+        left: 10px;
+        transform: rotate(-45deg);
+      }
+
+      &:nth-child(4) {
+        bottom: 419px;
+        right: 10px;
+        transform: rotate(45deg);
+      }
+    }
 
     &__line {
       display: flex;
@@ -428,13 +498,13 @@ const formatResult = (value) => {
       height: 64px;
       border-radius: 64px;
       border: 1px solid rgba(0, 0, 0, 0.14);
-      box-shadow: rgba(0, 0, 0, 0.06) 0px 4px 8px 0px;
+      box-shadow: -4px 4px 4px 0px rgba(0, 0, 0, 0.1);
       cursor: pointer;
       user-select: none;
 
       &.clear {
         color: #ffffff;
-        font-size: 18px;
+        font-size: 20px;
         background-color: hsl(0, 80%, 68%);
 
         &:hover {
@@ -444,19 +514,19 @@ const formatResult = (value) => {
 
       &.digit {
         color: #ffffff;
-        background-color: hsl(34, 100%, 60%);
+        background-color: hsl(34, 100%, 50%);
 
         &:hover {
-          background-color: hsl(34, 100%, 50%);
+          background-color: hsl(34, 100%, 48%);
         }
       }
 
       &.operator {
         color: #ffffff;
-        background-color: hsl(0, 0%, 70%);
+        background-color: hsl(0, 0%, 40%);
 
         &:hover {
-          background-color: hsl(0, 0%, 62%);
+          background-color: hsl(0, 0%, 32%);
         }
 
         .icon {
@@ -466,68 +536,64 @@ const formatResult = (value) => {
       }
 
       &.plusminus {
-        color: #ffffff;
-        background-color: hsl(0, 0%, 70%);
+        background-color: #ffffff;
 
         &:hover {
-          background-color: hsl(0, 0%, 62%);
+          background-color: hsl(212, 50%, 99%);
         }
 
         .icon {
-          width: 32px;
-          height: 32px;
+          width: 38px;
+          height: 38px;
         }
       }
 
       &.option {
-        color: #ffffff;
-        background-color: hsl(0, 0%, 70%);
+        background-color: #ffffff;
 
         &:hover {
-          background-color: hsl(0, 0%, 62%);
+          background-color: hsl(212, 50%, 99%);
         }
 
         .icon {
-          width: 30px;
-          height: 30px;
+          width: 36px;
+          height: 36px;
         }
       }
 
-      &.factorial {
-        color: #ffffff;
-        background-color: hsl(0, 0%, 70%);
+      &.swap {
+        background-color: #ffffff;
 
         &:hover {
-          background-color: hsl(0, 0%, 62%);
+          background-color: hsl(212, 50%, 99%);
         }
 
         .icon {
-          width: 26px;
-          height: 26px;
+          width: 32px;
+          height: auto;
         }
       }
 
       &.power {
-        color: #ffffff;
-        background-color: hsl(0, 0%, 70%);
+        background-color: #ffffff;
 
         &:hover {
-          background-color: hsl(0, 0%, 62%);
+          background-color: hsl(212, 50%, 99%);
         }
 
         .icon {
-          width: 18px;
-          height: 18px;
+          width: 24px;
+          height: 24px;
         }
       }
 
       &.zero {
         color: #ffffff;
-        background-color: hsl(34, 100%, 60%);
+        background-color: hsl(34, 100%, 50%);
         width: 144px;
 
         &:hover {
-          background-color: hsl(34, 100%, 50%);
+          background-color: hsl(34, 100%, 48%);
         }
       }
 
@@ -551,10 +617,18 @@ const formatResult = (value) => {
         .icon {
           position: absolute;
           top: 50%;
-          right: 24px;
           width: 32px;
           height: 32px;
           transform: translateY(-50%);
+
+          &:nth-child(1) {
+            right: 24px;
+          }
+
+          &:nth-child(2) {
+            left: 24px;
+            transform: scaleX(-1) translateY(-50%);
+          }
         }
       }
     }
