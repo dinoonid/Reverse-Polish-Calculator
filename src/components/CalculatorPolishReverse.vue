@@ -140,18 +140,13 @@ let operationInProgress = ref(false)
 let hasEntryError = ref(false)
 
 const processDigitClick = (digit) => {
-  if (hasEntryError.value) {
-    reset()
+  if (handleEntryError()) {
     entry.value = digit
     return
   }
-
   if (digit === '0' && entry.value === '0') return
-
   if (concatMode.value) {
-    if (isEntryUnderLimit()) {
-      entry.value = entry.value += digit
-    }
+    if (isEntryUnderLimit()) entry.value = entry.value += digit
   } else {
     if (operationInProgress.value) handleEntryList('add')
     entry.value = digit
@@ -161,13 +156,8 @@ const processDigitClick = (digit) => {
 }
 
 const processComaClick = () => {
-  if (hasEntryError.value) {
-    reset()
-    return
-  }
-
+  if (handleEntryError()) return
   if (entry.value.includes(',')) return
-
   if (isEntryUnderLimit()) {
     if (operationInProgress.value) {
       handleEntryList('add')
@@ -188,10 +178,7 @@ const isEntryUnderLimit = () => {
 }
 
 const processEnterClick = () => {
-  if (hasEntryError.value) {
-    reset()
-    return
-  }
+  if (handleEntryError()) return
   concatMode.value = false
   handleEntryList('add')
 }
@@ -218,12 +205,16 @@ const reset = () => {
   operationInProgress.value = false
 }
 
-const processSwap = () => {
+const handleEntryError = () => {
   if (hasEntryError.value) {
     reset()
-    return
+    return true
   }
+  return false
+}
 
+const processSwap = () => {
+  if (handleEntryError()) return
   if (entryList.value.length > 0) {
     const tempFirstEntryListElement = entryList.value[0]
     handleEntryList('replace')
@@ -232,10 +223,7 @@ const processSwap = () => {
 }
 
 const togglePositiveNegative = () => {
-  if (hasEntryError.value) {
-    reset()
-    return
-  }
+  if (handleEntryError()) return
   if (entry.value === '0' || entry.value === '0,') return
   if (entry.value[0] === '-') entry.value = entry.value.slice(1)
   else entry.value = `-${entry.value}`
@@ -248,11 +236,7 @@ const nextEntry = computed(() => {
 })
 
 const process = (type) => {
-  if (hasEntryError.value) {
-    reset()
-    return
-  }
-
+  if (handleEntryError()) return
   if (entryList.value.length > 0) {
     entry.value = formatResult(safeProcess(entry.value, entryList.value[0], type))
     shiftEntryList()
@@ -272,8 +256,7 @@ const safeProcess = (operand1, operand2, type) => {
     percent: (value1 * value2) / 100,
     power: Math.pow(value2, value1)
   }
-  const result = processList[type]
-  return result
+  return processList[type]
 }
 
 const shiftEntryList = () => {
@@ -289,48 +272,19 @@ const parseNumber = (value) => {
 }
 
 const formatResult = (value) => {
-  console.log('value == ', value)
-  if (value === Infinity || value === -Infinity) {
+  if (value === Infinity || value === -Infinity || Number.isNaN(value)) {
     hasEntryError.value = true
-    return '∞'
-  }
-  if (Number.isNaN(value)) {
-    hasEntryError.value = true
-    return 'NaN'
+    return Number.isNaN(value) ? 'NaN' : '∞'
   }
   const isInteger = Number.isInteger(value)
   const isNegative = value < 0
   let factor = Math.pow(10, 15)
   let copyValue = String(Math.round(value * factor) / factor)
   const cleanStr = copyValue.replace(/[^0-9]/g, '')
-  const cleanStrLength = cleanStr.length
-  if (isInteger) {
-    if (cleanStrLength > 12) {
-      copyValue = `${copyValue.slice(0, isNegative ? 12 : 11)}+`
-      hasEntryError.value = true
-    }
-  } else {
-    if (cleanStrLength > 12) {
-      if (isNegative) {
-        const newValue = copyValue.slice(0, 14)
-        const cleanNb = cleanNumberString(newValue)
-        if (cleanNb.length < 14) copyValue = `${cleanNb}`
-        else {
-          copyValue = `${cleanNb}`
-        }
-      } else {
-        const newValue = copyValue.slice(0, 13)
-        const cleanNb = cleanNumberString(newValue)
-        if (cleanNb.length < 13) copyValue = `${cleanNb}`
-        else {
-          copyValue = `${cleanNb}`
-        }
-      }
-    } else {
-      copyValue = cleanNumberString(copyValue)
-    }
-  }
-  return copyValue
+  if (cleanStr.length <= 12) return cleanNumberString(copyValue)
+  if (!isInteger) return cleanNumberString(copyValue.slice(0, isNegative ? 14 : 13))
+  hasEntryError.value = true
+  return `${copyValue.slice(0, isNegative ? 12 : 11)}+`
 }
 </script>
 
