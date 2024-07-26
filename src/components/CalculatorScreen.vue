@@ -25,7 +25,7 @@ const props = defineProps(['entry', 'entryList', 'hasEntryError'])
 const nextEntry = computed(() => {
   const entryListLength = props.entryList.length
   if (entryListLength > 0) return props.entryList[0]
-  else return '0'
+  else return ''
 })
 </script>
 
@@ -76,6 +76,7 @@ const nextEntry = computed(() => {
     font-size: 24px;
     font-family: 'Fragment Mono', monospace;
     line-height: 24px;
+    min-height: 24px;
     text-align: left;
     margin-bottom: 16px;
   }
