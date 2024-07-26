@@ -186,7 +186,7 @@ const formatResult = (value) => {
   const isInteger = Number.isInteger(value)
   const isNegative = value < 0
   let factor = Math.pow(10, 15)
-  let copyValue = String(Math.round(value * factor) / factor)
+  let copyValue = String(isInteger ? Math.round(value) : Math.round(value * factor) / factor)
   const cleanStr = copyValue.replace(/[^0-9]/g, '')
   if (cleanStr.length <= 12) return cleanNumberString(copyValue)
   if (!isInteger) return cleanNumberString(copyValue.slice(0, isNegative ? 14 : 13))
