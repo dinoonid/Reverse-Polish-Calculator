@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="digits"
-    :style="{ 'justify-content': digits.position === 'end' ? 'flex-end' : 'flex-start' }"
-  >
+  <div class="digits">
     <Digit
       v-for="n in digits.digitCount"
       :key="`digit-${n}`"
@@ -48,6 +45,6 @@ const getDigit = computed(() => {
 <style scoped lang="scss">
 .digits {
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 </style>

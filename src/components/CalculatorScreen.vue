@@ -1,7 +1,6 @@
 <template>
   <div class="screen">
     <div class="screen__dots">
-      <!-- <Digits :digit-width="100" :digit-count="2" /> -->
       <div
         v-for="n in 33"
         :key="`dot-${n}`"
@@ -26,14 +25,12 @@ const props = defineProps(['entry', 'entryList', 'hasEntryError'])
 
 const digitsPrimary = {
   digitWidth: 30,
-  digitCount: 13,
-  position: 'end'
+  digitCount: 13
 }
 
 const digitsSecondary = {
   digitWidth: 20,
-  digitCount: 13,
-  position: 'end'
+  digitCount: 13
 }
 
 const nextEntry = computed(() => {
