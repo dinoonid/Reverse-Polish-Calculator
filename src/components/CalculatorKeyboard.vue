@@ -1,70 +1,58 @@
 <template>
-  <div class="calc__keyboard">
-    <div class="calc__keyboard__line">
-      <div class="calc__keyboard__row clear" title="Clear all" @click="emitButtonClicked('ac')">
-        AC
-      </div>
-      <div class="calc__keyboard__row enter" title="Add number" @click="emitButtonClicked('enter')">
+  <div class="keyboard">
+    <div class="keyboard__line">
+      <div class="keyboard__row clear" title="Clear all" @click="emitButtonClicked('ac')">AC</div>
+      <div class="keyboard__row enter" title="Add number" @click="emitButtonClicked('enter')">
         <img alt="return" class="icon" :src="arrowReturn" />
         <img alt="return" class="icon" :src="arrowReturn" />
         <div class="text">enter</div>
       </div>
-      <div class="calc__keyboard__row clear" title="Clear number" @click="emitButtonClicked('c')">
-        C
-      </div>
+      <div class="keyboard__row clear" title="Clear number" @click="emitButtonClicked('c')">C</div>
     </div>
-    <div class="calc__keyboard__line">
-      <div class="calc__keyboard__row swap" title="Swap" @click="emitButtonClicked('swap')">
+    <div class="keyboard__line">
+      <div class="keyboard__row swap" title="Swap" @click="emitButtonClicked('swap')">
         <img alt="swap" class="icon" :src="swap" />
       </div>
-      <div class="calc__keyboard__row digit" id="key-7" @click="emitButtonClicked('7')">7</div>
-      <div class="calc__keyboard__row digit" id="key-8" @click="emitButtonClicked('8')">8</div>
-      <div class="calc__keyboard__row digit" id="key-9" @click="emitButtonClicked('9')">9</div>
-      <div class="calc__keyboard__row operator" title="Divide" @click="emitButtonClicked('divide')">
+      <div class="keyboard__row digit" id="key-7" @click="emitButtonClicked('7')">7</div>
+      <div class="keyboard__row digit" id="key-8" @click="emitButtonClicked('8')">8</div>
+      <div class="keyboard__row digit" id="key-9" @click="emitButtonClicked('9')">9</div>
+      <div class="keyboard__row operator" title="Divide" @click="emitButtonClicked('divide')">
         <img alt="division" class="icon" :src="division" />
       </div>
     </div>
-    <div class="calc__keyboard__line">
-      <div class="calc__keyboard__row option" title="Percent" @click="emitButtonClicked('percent')">
+    <div class="keyboard__line">
+      <div class="keyboard__row option" title="Percent" @click="emitButtonClicked('percent')">
         <img alt="percent" class="icon" :src="percent" />
       </div>
-      <div class="calc__keyboard__row digit" id="key-4" @click="emitButtonClicked('4')">4</div>
-      <div class="calc__keyboard__row digit" id="key-5" @click="emitButtonClicked('5')">5</div>
-      <div class="calc__keyboard__row digit" id="key-6" @click="emitButtonClicked('6')">6</div>
-      <div
-        class="calc__keyboard__row operator"
-        title="Multiply"
-        @click="emitButtonClicked('multiply')"
-      >
+      <div class="keyboard__row digit" id="key-4" @click="emitButtonClicked('4')">4</div>
+      <div class="keyboard__row digit" id="key-5" @click="emitButtonClicked('5')">5</div>
+      <div class="keyboard__row digit" id="key-6" @click="emitButtonClicked('6')">6</div>
+      <div class="keyboard__row operator" title="Multiply" @click="emitButtonClicked('multiply')">
         <img alt="multiplication" class="icon" :src="multiplication" />
       </div>
     </div>
-    <div class="calc__keyboard__line">
-      <div class="calc__keyboard__row power" title="Power" @click="emitButtonClicked('xy')">
+    <div class="keyboard__line">
+      <div class="keyboard__row power" title="Power" @click="emitButtonClicked('xy')">
         <img alt="xy" class="icon" :src="xy" />
       </div>
-      <div class="calc__keyboard__row digit" id="key-1" @click="emitButtonClicked('1')">1</div>
-      <div class="calc__keyboard__row digit" id="key-2" @click="emitButtonClicked('2')">2</div>
-      <div class="calc__keyboard__row digit" id="key-3" @click="emitButtonClicked('3')">3</div>
-      <div
-        class="calc__keyboard__row operator"
-        title="Subtract"
-        @click="emitButtonClicked('subtract')"
-      >
+      <div class="keyboard__row digit" id="key-1" @click="emitButtonClicked('1')">1</div>
+      <div class="keyboard__row digit" id="key-2" @click="emitButtonClicked('2')">2</div>
+      <div class="keyboard__row digit" id="key-3" @click="emitButtonClicked('3')">3</div>
+      <div class="keyboard__row operator" title="Subtract" @click="emitButtonClicked('subtract')">
         <img alt="soustraction" class="icon" :src="soustraction" />
       </div>
     </div>
-    <div class="calc__keyboard__line">
+    <div class="keyboard__line">
       <div
-        class="calc__keyboard__row digit plusminus"
+        class="keyboard__row digit plusminus"
         title="Negative number"
         @click="emitButtonClicked('plusminus')"
       >
         <img alt="addition" class="icon" :src="plusminus" />
       </div>
-      <div class="calc__keyboard__row zero" id="key-0" @click="emitButtonClicked('0')">0</div>
-      <div class="calc__keyboard__row digit" @click="emitButtonClicked('coma')">,</div>
-      <div class="calc__keyboard__row operator" title="Add" @click="emitButtonClicked('add')">
+      <div class="keyboard__row zero" id="key-0" @click="emitButtonClicked('0')">0</div>
+      <div class="keyboard__row digit" @click="emitButtonClicked('coma')">•</div>
+      <div class="keyboard__row operator" title="Add" @click="emitButtonClicked('add')">
         <img alt="addition" class="icon" :src="addition" />
       </div>
     </div>
@@ -90,7 +78,7 @@ const emitButtonClicked = (key) => {
 </script>
 
 <style scoped lang="scss">
-.calc__keyboard {
+.keyboard {
   position: relative;
   display: flex;
   flex-direction: column;
