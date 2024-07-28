@@ -1,45 +1,45 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 240 420"
+    viewBox="0 0 240 430"
     class="digit"
     :style="{ width: digitWidth ? `${digitWidth}px` : '12px' }"
   >
-    <circle class="digit__bar" :class="{ active: digit.point }" cx="220" cy="400" r="20" />
+    <circle class="digit__bar" :class="{ active: digit.point }" cx="220" cy="410" r="20" />
     <path
       class="digit__bar"
       :class="{ active: isKeyAcitive.includes('top') }"
-      d="m 45, 0 -20,20 20,20 H 155 l 20,-20 -20,-20 Z"
-    />
-    <path
-      class="digit__bar"
-      :class="{ active: isKeyAcitive.includes('middle') }"
-      d="m 45,175 -20,20 20,20 H 155 l 20,-20 -20,-20 z"
-    />
-    <path
-      class="digit__bar"
-      :class="{ active: isKeyAcitive.includes('bottom') }"
-      d="m 45, 350 -20,20 20,20 H 155 l 20,-20 -20,-20 z"
-    />
-    <path
-      class="digit__bar"
-      :class="{ active: isKeyAcitive.includes('top-right') }"
-      d="m 160,170 20,20 20,-20 v -125 l -20,-20 -20,20 Z"
-    />
-    <path
-      class="digit__bar"
-      :class="{ active: isKeyAcitive.includes('bottom-right') }"
-      d="m 160,345 20,20 20,-20 v -125 l -20,-20 -20,20 Z"
+      d="m 35, 0 -10,10 30,30 h 90 l 30,-30 -10,-10 Z"
     />
     <path
       class="digit__bar"
       :class="{ active: isKeyAcitive.includes('top-left') }"
-      d="m 0,170 20,20 20,-20 v -125 l -20,-20 -20,20 Z"
+      d="m 10,180 10,10 30,-20 v -125 l -30,-30 -10,10 Z"
+    />
+    <path
+      class="digit__bar"
+      :class="{ active: isKeyAcitive.includes('top-right') }"
+      d="m 150,170 30,20 10,-10 v -155 l -10,-10 -30,30 Z"
+    />
+    <path
+      class="digit__bar"
+      :class="{ active: isKeyAcitive.includes('middle') }"
+      d="m 55,175 -30,20 30,20 h 90 l 30,-20 -30,-20 z"
+    />
+    <path
+      class="digit__bar"
+      :class="{ active: isKeyAcitive.includes('bottom') }"
+      d="m 55, 350 -30,30 10,10 h 130 l 10,-10 -30,-30 z"
     />
     <path
       class="digit__bar"
       :class="{ active: isKeyAcitive.includes('bottom-left') }"
-      d="m 0,345 20,20 20,-20 v -125 l -20,-20 -20,20 Z"
+      d="m 10,365 10,10 30,-30 v -125 l -30,-20 -10,10 Z"
+    />
+    <path
+      class="digit__bar"
+      :class="{ active: isKeyAcitive.includes('bottom-right') }"
+      d="m 150,345 30,30 10,-10 v -155 l -10,-10 -30,20 Z"
     />
   </svg>
 </template>
@@ -74,13 +74,13 @@ const isKeyAcitive = computed(() => {
 .digit {
   width: 25px;
   height: auto;
-  transform: skewX(-6deg);
+  transform: skewX(-4deg);
 
   &__bar {
-    fill: hsla(160, 67%, 24%, 0.12);
+    fill: hsla(160, 67%, 24%, 0.1);
 
     &.active {
-      fill: hsla(160, 20%, 30%);
+      fill: hsla(160, 26%, 10%, 0.7);
     }
   }
 }

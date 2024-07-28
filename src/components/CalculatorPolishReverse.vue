@@ -205,10 +205,10 @@ const formatResult = (value) => {
   height: 100vh;
 
   &__wrapper {
-    box-shadow: -12px 16px 20px rgba(0, 0, 0, 0.2);
     border-radius: 32px;
-    border: 1px solid #959da566;
+    border: 1px solid hsl(220, 30%, 30%, 0.2);
     overflow: hidden;
+    box-shadow: -16px 20px 20px hsl(220, 30%, 30%, 0.2);
 
     &__screen {
       background: linear-gradient(210deg, hsl(0, 0%, 60%), hsl(0, 0%, 0%));
@@ -236,7 +236,7 @@ const formatResult = (value) => {
       position: relative;
       background-color: #ffffff;
       border-radius: 0 0 16px 16px;
-      border: 1px solid hsl(212, 12%, 80%);
+      border: 1px solid hsl(220, 30%, 30%, 0.2);
       border-top: none;
       overflow: hidden;
 
@@ -247,7 +247,7 @@ const formatResult = (value) => {
         left: 0;
         bottom: 0;
         right: 0;
-        background: linear-gradient(225deg, #ffffff, hsl(212, 12%, 94%));
+        background: linear-gradient(225deg, #ffffff, hsl(220, 30%, 94%));
       }
     }
 

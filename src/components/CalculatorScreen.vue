@@ -68,14 +68,14 @@ const nextEntry = computed(() => {
   }
 
   &__dot {
-    background-color: hsla(160, 67%, 24%, 0.12);
+    background-color: hsla(160, 67%, 24%, 0.1);
     width: 6px;
     height: 6px;
     border-radius: 6px;
 
     &.active {
       position: relative;
-      background-color: hsla(160, 20%, 30%);
+      background-color: hsla(160, 26%, 10%, 0.7);
     }
   }
 
