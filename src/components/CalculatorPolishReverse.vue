@@ -13,7 +13,7 @@
           <img alt="screw" class="calc__container__screw" :src="screw" />
           <img alt="screw" class="calc__container__screw" :src="screw" />
 
-          <Keyboard @button-clicked="handleButtonClick" />
+          <Keyboard @button-clicked="handleButtonClick" @enable-calculator="enableCalculator" />
         </div>
       </div>
     </div>
@@ -26,22 +26,26 @@ import screw from '@/assets/images/screw.svg'
 import Screen from '@/components/CalculatorScreen.vue'
 import Keyboard from '@/components/CalculatorKeyboard.vue'
 
-let entry = ref('0')
+let entry = ref('')
 let entryList = ref([])
 let concatMode = ref(false)
 let operationInProgress = ref(false)
 let hasEntryError = ref(false)
 
+const enableCalculator = () => {
+  entry.value = '0'
+}
+
 const operations = {
-  ac: () => resetAll(),
-  c: () => reset(),
+  clearall: () => resetAll(),
+  clear: () => reset(),
   enter: () => processEnterClick(),
   add: () => process('add'),
   subtract: () => process('subtract'),
   multiply: () => process('multiply'),
   divide: () => process('divide'),
   percent: () => process('percent'),
-  xy: () => process('power'),
+  power: () => process('power'),
   swap: () => processSwap(),
   plusminus: () => togglePositiveNegative(),
   coma: () => processComaClick()
@@ -200,7 +204,6 @@ const formatResult = (value) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
   width: 100vw;
   height: 100vh;
 

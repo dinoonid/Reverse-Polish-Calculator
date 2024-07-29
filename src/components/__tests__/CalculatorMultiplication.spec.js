@@ -13,7 +13,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '6'
     instance.entryList = ['2']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('12')
     expect(instance.entryList).toEqual([])
   })
@@ -23,15 +23,15 @@ describe('On click of multiply button', () => {
     instance.entry = '6'
     instance.entryList = ['2']
     instance.concatMode = true
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('12')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['12'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['12'])
     expect(instance.concatMode).toBe(true)
@@ -42,19 +42,19 @@ describe('On click of multiply button', () => {
     instance.entry = '6'
     instance.entryList = ['2']
     instance.concatMode = true
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('12')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('0')
     expect(instance.entryList).toEqual(['12'])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['12'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['12'])
     expect(instance.concatMode).toBe(true)
@@ -65,15 +65,15 @@ describe('On click of multiply button', () => {
     instance.entry = '2,5'
     instance.entryList = ['3']
     instance.concatMode = true
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('7,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['7,5'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['7,5'])
     expect(instance.concatMode).toBe(true)
@@ -84,19 +84,19 @@ describe('On click of multiply button', () => {
     instance.entry = '2,5'
     instance.entryList = ['3']
     instance.concatMode = true
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('7,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('7,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['7,5'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['7,5'])
     expect(instance.concatMode).toBe(true)
@@ -105,7 +105,7 @@ describe('On click of multiply button', () => {
   it('Clicking the multiplication button has no effect when entryList is empty', () => {
     const instance = wrapper.vm
     instance.entry = '24'
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('24')
   })
 
@@ -113,7 +113,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '2'
     instance.entryList = ['3']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('6')
   })
 
@@ -121,7 +121,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '4,2'
     instance.entryList = ['3']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('12,6')
   })
 
@@ -129,7 +129,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '-4,2'
     instance.entryList = ['3']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('-12,6')
   })
 
@@ -137,7 +137,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '-2,4'
     instance.entryList = ['2,2']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('-5,28')
   })
 
@@ -145,7 +145,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '999999999999'
     instance.entryList = ['999999999999']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('9.999999999+')
   })
 
@@ -153,7 +153,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '999999999999'
     instance.entryList = ['999999999999']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('9.999999999+')
     expect(instance.hasEntryError).toBe(true)
   })
@@ -162,7 +162,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '9,99999999999'
     instance.entryList = ['9,99999999999']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('99,9999999998')
   })
 
@@ -170,7 +170,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '-999999999999'
     instance.entryList = ['-999999999999']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('9.999999999+')
   })
 
@@ -178,7 +178,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '-999999999999'
     instance.entryList = ['-999999999999']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('9.999999999+')
     expect(instance.hasEntryError).toBe(true)
   })
@@ -187,7 +187,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '-9,99999999999'
     instance.entryList = ['-9,99999999999']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('99,9999999998')
   })
 
@@ -195,7 +195,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '0,2'
     instance.entryList = ['0,1']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('0,02')
   })
 
@@ -203,7 +203,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '-0,2'
     instance.entryList = ['-0,1']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('0,02')
   })
 
@@ -211,7 +211,7 @@ describe('On click of multiply button', () => {
     const instance = wrapper.vm
     instance.entry = '-0,2'
     instance.entryList = ['0,1']
-    instance.process('multiply')
+    instance.handleButtonClick('multiply')
     expect(instance.entry).toBe('-0,02')
   })
 })

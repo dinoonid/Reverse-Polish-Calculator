@@ -13,7 +13,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '20'
     instance.entryList = ['30']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('50')
     expect(instance.entryList).toEqual([])
   })
@@ -23,15 +23,15 @@ describe('On click of add button', () => {
     instance.entry = '20'
     instance.entryList = ['30']
     instance.concatMode = true
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('50')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['50'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['50'])
     expect(instance.concatMode).toBe(true)
@@ -42,19 +42,19 @@ describe('On click of add button', () => {
     instance.entry = '20'
     instance.entryList = ['30']
     instance.concatMode = true
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('50')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('0')
     expect(instance.entryList).toEqual(['50'])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['50'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['50'])
     expect(instance.concatMode).toBe(true)
@@ -65,15 +65,15 @@ describe('On click of add button', () => {
     instance.entry = '2,5'
     instance.entryList = ['3']
     instance.concatMode = true
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('5,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['5,5'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['5,5'])
     expect(instance.concatMode).toBe(true)
@@ -84,19 +84,19 @@ describe('On click of add button', () => {
     instance.entry = '2,5'
     instance.entryList = ['3']
     instance.concatMode = true
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('5,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('5,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['5,5'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['5,5'])
     expect(instance.concatMode).toBe(true)
@@ -105,34 +105,34 @@ describe('On click of add button', () => {
   it('Clicking the addition button has no effect when entryList is empty', () => {
     const instance = wrapper.vm
     instance.entry = '24'
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('24')
   })
 
   it('Should set entry to the result of adding the current entry to the first item in entryList when the addition button is clicked', () => {
     const instance = wrapper.vm
     instance.entry = '24'
-    instance.processEnterClick()
+    instance.handleButtonClick('enter')
     expect(instance.entryList).toEqual(['24'])
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('48')
   })
 
   it('Should set entry to the result of adding a floating number to the first item in entryList when the addition button is clicked', () => {
     const instance = wrapper.vm
     instance.entry = '14,2'
-    instance.processEnterClick()
+    instance.handleButtonClick('enter')
     expect(instance.entryList).toEqual(['14,2'])
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('28,4')
   })
 
   it('Should set entry to the result of adding a negative floating number to the first item in entryList when the addition button is clicked', () => {
     const instance = wrapper.vm
     instance.entry = '-14,2'
-    instance.processEnterClick()
+    instance.handleButtonClick('enter')
     expect(instance.entryList).toEqual(['-14,2'])
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('-28,4')
   })
 
@@ -140,7 +140,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '-2,4'
     instance.entryList = ['2,2']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('-0,2')
   })
 
@@ -148,7 +148,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '999999999999'
     instance.entryList = ['999999999999']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('19999999999+')
   })
 
@@ -156,7 +156,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '999999999999'
     instance.entryList = ['999999999999']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('19999999999+')
     expect(instance.hasEntryError).toBe(true)
   })
@@ -165,7 +165,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '9,99999999999'
     instance.entryList = ['9,99999999999']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('19,9999999999')
   })
 
@@ -173,7 +173,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '9,99999999999'
     instance.entryList = ['9,99999999999']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('19,9999999999')
   })
 
@@ -181,7 +181,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '-999999999999'
     instance.entryList = ['-999999999999']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('-19999999999+')
   })
 
@@ -189,7 +189,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '-999999999999'
     instance.entryList = ['-999999999999']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('-19999999999+')
     expect(instance.hasEntryError).toBe(true)
   })
@@ -198,7 +198,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '-9,99999999999'
     instance.entryList = ['-9,99999999999']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('-19,9999999999')
   })
 
@@ -206,7 +206,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '0,2'
     instance.entryList = ['0,1']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('0,3')
   })
 
@@ -214,7 +214,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '-0,2'
     instance.entryList = ['-0,1']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('-0,3')
   })
 
@@ -222,7 +222,7 @@ describe('On click of add button', () => {
     const instance = wrapper.vm
     instance.entry = '-0,2'
     instance.entryList = ['0,1']
-    instance.process('add')
+    instance.handleButtonClick('add')
     expect(instance.entry).toBe('-0,1')
   })
 })

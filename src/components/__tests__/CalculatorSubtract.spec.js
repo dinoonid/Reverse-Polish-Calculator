@@ -13,7 +13,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '4'
     instance.entryList = ['6']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('2')
     expect(instance.entryList).toEqual([])
   })
@@ -23,15 +23,15 @@ describe('On click of subtract button', () => {
     instance.entry = '4'
     instance.entryList = ['6']
     instance.concatMode = true
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('2')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['2'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['2'])
     expect(instance.concatMode).toBe(true)
@@ -42,19 +42,19 @@ describe('On click of subtract button', () => {
     instance.entry = '4'
     instance.entryList = ['6']
     instance.concatMode = true
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('2')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('0')
     expect(instance.entryList).toEqual(['2'])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['2'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['2'])
     expect(instance.concatMode).toBe(true)
@@ -65,15 +65,15 @@ describe('On click of subtract button', () => {
     instance.entry = '2,5'
     instance.entryList = ['6']
     instance.concatMode = true
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('3,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['3,5'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['3,5'])
     expect(instance.concatMode).toBe(true)
@@ -84,19 +84,19 @@ describe('On click of subtract button', () => {
     instance.entry = '2,5'
     instance.entryList = ['6']
     instance.concatMode = true
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('3,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('3,5')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['3,5'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['3,5'])
     expect(instance.concatMode).toBe(true)
@@ -105,7 +105,7 @@ describe('On click of subtract button', () => {
   it('Clicking the substraction button has no effect when entryList is empty', () => {
     const instance = wrapper.vm
     instance.entry = '24'
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('24')
   })
 
@@ -113,7 +113,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '2'
     instance.entryList = ['6']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('4')
   })
 
@@ -121,7 +121,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '4,2'
     instance.entryList = ['6']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('1,8')
   })
 
@@ -129,7 +129,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '-4,2'
     instance.entryList = ['6']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('10,2')
   })
 
@@ -137,7 +137,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '4,4'
     instance.entryList = ['2,6']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('-1,8')
   })
 
@@ -145,7 +145,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '-2,4'
     instance.entryList = ['2,2']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('4,6')
   })
 
@@ -153,7 +153,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '2,4'
     instance.entryList = ['-2,2']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('-4,6')
   })
 
@@ -161,7 +161,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '3,2'
     instance.entryList = ['7,4']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('4,2')
   })
 
@@ -169,7 +169,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '-3,2'
     instance.entryList = ['-7,4']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('-4,2')
   })
 
@@ -177,7 +177,7 @@ describe('On click of subtract button', () => {
     const instance = wrapper.vm
     instance.entry = '-3,2'
     instance.entryList = ['7,4']
-    instance.process('subtract')
+    instance.handleButtonClick('subtract')
     expect(instance.entry).toBe('10,6')
   })
 })

@@ -13,7 +13,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '6'
     instance.entryList = ['24']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual([])
   })
@@ -23,15 +23,15 @@ describe('On click of divide button', () => {
     instance.entry = '6'
     instance.entryList = ['24']
     instance.concatMode = true
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['4'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['4'])
     expect(instance.concatMode).toBe(true)
@@ -42,19 +42,19 @@ describe('On click of divide button', () => {
     instance.entry = '6'
     instance.entryList = ['24']
     instance.concatMode = true
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('0')
     expect(instance.entryList).toEqual(['4'])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['4'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['4'])
     expect(instance.concatMode).toBe(true)
@@ -65,15 +65,15 @@ describe('On click of divide button', () => {
     instance.entry = '2,5'
     instance.entryList = ['24']
     instance.concatMode = true
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('9,6')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('6')
+    instance.handleButtonClick('6')
     expect(instance.entry).toBe('6')
     expect(instance.entryList).toEqual(['9,6'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('64')
     expect(instance.entryList).toEqual(['9,6'])
     expect(instance.concatMode).toBe(true)
@@ -84,19 +84,19 @@ describe('On click of divide button', () => {
     instance.entry = '2,5'
     instance.entryList = ['24']
     instance.concatMode = true
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('9,6')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processComaClick()
+    instance.handleButtonClick('coma')
     expect(instance.entry).toBe('9,6')
     expect(instance.entryList).toEqual([])
     expect(instance.concatMode).toBe(false)
-    instance.processDigitClick('4')
+    instance.handleButtonClick('4')
     expect(instance.entry).toBe('4')
     expect(instance.entryList).toEqual(['9,6'])
     expect(instance.concatMode).toBe(true)
-    instance.processDigitClick('8')
+    instance.handleButtonClick('8')
     expect(instance.entry).toBe('48')
     expect(instance.entryList).toEqual(['9,6'])
     expect(instance.concatMode).toBe(true)
@@ -105,7 +105,7 @@ describe('On click of divide button', () => {
   it('Clicking the division button has no effect when entryList is empty', () => {
     const instance = wrapper.vm
     instance.entry = '24'
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('24')
   })
 
@@ -113,7 +113,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '2'
     instance.entryList = ['24']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('12')
   })
 
@@ -121,7 +121,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '4,5'
     instance.entryList = ['24']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('5,33333333333')
   })
 
@@ -129,7 +129,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '-4,5'
     instance.entryList = ['27']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('-6')
   })
 
@@ -137,7 +137,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '-2,2'
     instance.entryList = ['6,6']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('-3')
   })
 
@@ -145,7 +145,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '0,022'
     instance.entryList = ['0,099']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('4,5')
   })
 
@@ -153,7 +153,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '-0,022'
     instance.entryList = ['-0,099']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('4,5')
   })
 
@@ -161,7 +161,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '-0,022'
     instance.entryList = ['0,099']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('-4,5')
   })
 
@@ -169,7 +169,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '0'
     instance.entryList = ['0']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('NaN')
   })
 
@@ -177,7 +177,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '0'
     instance.entryList = ['78']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('∞')
   })
 
@@ -185,7 +185,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '0'
     instance.entryList = ['-78']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('∞')
   })
 
@@ -193,7 +193,7 @@ describe('On click of divide button', () => {
     const instance = wrapper.vm
     instance.entry = '78'
     instance.entryList = ['0']
-    instance.process('divide')
+    instance.handleButtonClick('divide')
     expect(instance.entry).toBe('0')
   })
 })

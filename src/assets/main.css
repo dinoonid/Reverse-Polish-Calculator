@@ -20,6 +20,7 @@ body {
   color: #333333;
   background: linear-gradient(210deg, hsl(40, 10%, 96%), hsl(40, 12%, 80%));
   font-family:
+    'Urbanis',
     Inter,
     -apple-system,
     BlinkMacSystemFont,
