@@ -2,6 +2,7 @@
   <div
     class="key"
     :class="keyOption.type"
+    :title="keyOption.title ? keyOption.title : ''"
     @click="emitButtonClicked(keyOption.action)"
     @mousedown="handleMouseDown(keyOption.action, $event)"
     @mouseup="handleMouseUpLeave(keyOption.action, $event)"
