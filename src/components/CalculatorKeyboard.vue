@@ -14,7 +14,6 @@
 
 <script setup>
 import CalculatorKey from '@/components/CalculatorKey.vue'
-import swap from '@/assets/images/swap.svg'
 
 const emit = defineEmits(['buttonClicked', 'enableCalculator'])
 
@@ -45,11 +44,10 @@ const keyList = [
   ],
   [
     {
-      key: 'swap',
-      type: 'swap',
+      key: '↕',
+      type: 'option',
       action: 'swap',
-      title: 'Swap',
-      icon: swap
+      title: 'Swap'
     },
     {
       key: '7',
@@ -163,9 +161,9 @@ const emitButtonClicked = (key) => {
   if (isCalculatorActived) emit('buttonClicked', key)
 }
 
-const emitEnableCalculator = () => {
-  isCalculatorActived = true
-  emit('enableCalculator')
+const emitEnableCalculator = (status) => {
+  isCalculatorActived = status
+  emit('enableCalculator', status)
 }
 </script>
 

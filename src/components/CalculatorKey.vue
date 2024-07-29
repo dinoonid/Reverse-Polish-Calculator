@@ -7,8 +7,7 @@
     @mouseup="handleMouseUpLeave(keyOption.action, $event)"
     @mouseleave="handleMouseUpLeave(keyOption.action, $event)"
   >
-    <img v-if="keyOption.icon" :alt="keyOption.title" class="icon" :src="keyOption.icon" />
-    <span v-else>{{ keyOption.key }}</span>
+    <span>{{ keyOption.key }}</span>
     <span v-if="keyOption.option" class="key__start">{{ keyOption.option.key }}</span>
   </div>
 </template>
@@ -26,10 +25,10 @@ const emitButtonClicked = (key) => {
 
 const handleMouseDown = (action, event) => {
   event.currentTarget.classList.add('animate')
-  if (!isCalculatorActived && action === 'clearall') {
+  if (action === 'clearall') {
     holdTimeout = setTimeout(() => {
-      isCalculatorActived = true
-      emit('enableCalculator')
+      isCalculatorActived = !isCalculatorActived
+      emit('enableCalculator', isCalculatorActived)
     }, 1000)
   }
 }
@@ -77,7 +76,7 @@ const handleMouseUpLeave = (action, event) => {
   }
 
   &:hover {
-    background: hsl(220, 30%, 100%);
+    background: hsl(220, 30%, 98%);
   }
 
   &.animate {
@@ -112,20 +111,6 @@ const handleMouseUpLeave = (action, event) => {
 
   &.option {
     color: #33cccc;
-  }
-
-  &.swap {
-    .icon {
-      width: 22px;
-      height: auto;
-    }
-
-    &.animate {
-      .icon {
-        width: 20px;
-        height: auto;
-      }
-    }
   }
 
   &.zero {

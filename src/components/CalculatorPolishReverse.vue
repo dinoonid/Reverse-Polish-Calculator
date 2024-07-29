@@ -32,8 +32,12 @@ let concatMode = ref(false)
 let operationInProgress = ref(false)
 let hasEntryError = ref(false)
 
-const enableCalculator = () => {
-  entry.value = '0'
+const enableCalculator = (status) => {
+  if (status) entry.value = '0'
+  else {
+    resetAll()
+    entry.value = ''
+  }
 }
 
 const operations = {
