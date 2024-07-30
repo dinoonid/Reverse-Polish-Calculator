@@ -1,4 +1,4 @@
-![Reverse Polish Calculator](assets/images/reverse_polish_calculator.png)
+![Reverse Polish Calculator](assets/reverse_polish_calculator.png)
 
 # calculatrice
 
