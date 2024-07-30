@@ -77,10 +77,10 @@ const isKeyAcitive = computed(() => {
   transform: skewX(-4deg);
 
   &__bar {
-    fill: hsla(160, 67%, 24%, 0.1);
+    fill: hsla(180, 67%, 24%, 0.1);
 
     &.active {
-      fill: hsla(160, 26%, 10%, 0.7);
+      fill: hsla(180, 26%, 10%, 0.7);
     }
   }
 }

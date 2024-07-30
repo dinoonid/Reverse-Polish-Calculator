@@ -150,13 +150,22 @@ describe('behavior of concatMode property', () => {
     wrapper = mount(Calculator)
   })
 
-  it('Should concatMode remain false when concatMode is false and button (0) is clicked', () => {
+  it('Should concatMode remain false when concatMode is false and button(0) is clicked', () => {
     const instance = wrapper.vm
     instance.entry = '0'
     expect(instance.concatMode).toBe(false)
     instance.handleButtonClick('0')
     expect(instance.entry).toBe('0')
     expect(instance.concatMode).toBe(false)
+  })
+
+  it('Should set entry to digit when entry is 0 and a digit button is clicked', () => {
+    const instance = wrapper.vm
+    instance.entry = '0'
+    instance.concatMode = true
+    instance.handleButtonClick('5')
+    expect(instance.entry).toBe('5')
+    expect(instance.concatMode).toBe(true)
   })
 
   it('Should set concatMode to true when concatMode is false and button (,) is clicked', () => {

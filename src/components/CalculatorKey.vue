@@ -8,8 +8,11 @@
     @mouseup="handleMouseUpLeave(keyOption.action, $event)"
     @mouseleave="handleMouseUpLeave(keyOption.action, $event)"
   >
-    <span>{{ keyOption.key }}</span>
-    <span v-if="keyOption.option" class="key__start">{{ keyOption.option.key }}</span>
+    <div class="key__content">
+      <img v-if="keyOption.icon" :src="keyOption.icon" />
+      <span v-else>{{ keyOption.key }}</span>
+      <span v-if="keyOption.option" class="key__secondary">{{ keyOption.option.key }}</span>
+    </div>
   </div>
 </template>
 
@@ -46,11 +49,7 @@ const handleMouseUpLeave = (action, event) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #777777;
-  font-size: 28px;
   background: linear-gradient(210deg, hsl(220, 30%, 92%) 0%, hsl(220, 30%, 100%) 90%);
-  line-height: 28px;
-  text-align: center;
   width: 64px;
   height: 64px;
   border-radius: 64px;
@@ -80,68 +79,99 @@ const handleMouseUpLeave = (action, event) => {
     background: hsl(220, 30%, 98%);
   }
 
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777777;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 64px;
+    text-align: center;
+    text-shadow: 0 0 4px #ffffff;
+    text-shadow:
+      1px -1px 1px #ffffff,
+      1px -1px 1px #ffffff,
+      1px -1px 1px #ffffff,
+      1px -1px 1px #ffffff,
+      0 0 1px #ffffff,
+      0 0 1px #ffffff,
+      0 0 1px #ffffff,
+      0 0 1px #ffffff;
+  }
+
   &.animate {
-    font-size: 27px;
     width: 62px;
     height: 62px;
     margin: 0 1px;
     box-shadow:
       0px 0px 0px 2px hsl(220, 30%, 30%, 0.14),
       -2px 4px 6px 0px hsl(220, 30%, 30%, 0.1);
+
+    .key__content {
+      transform: scale(0.94);
+    }
   }
 
   &.clear {
-    color: hsl(26, 100%, 60%);
-    font-size: 24px;
-    &.animate {
-      font-size: 23px;
+    .key__content {
+      color: hsl(26, 100%, 60%);
+      font-size: 24px;
     }
   }
 
   &.clearall {
-    color: hsl(26, 100%, 60%);
-    font-size: 22px;
-    padding-bottom: 9px;
-    &.animate {
-      font-size: 21px;
-      .key__start {
-        font-size: 12px;
-      }
+    .key__content {
+      color: hsl(26, 100%, 60%);
+      font-size: 22px;
+      padding-bottom: 9px;
     }
   }
 
   &.option {
-    color: #33cccc;
+    .key__content {
+      color: #33cccc;
+    }
+  }
+
+  &.operator {
+    .key__content {
+      color: #33cccc;
+      font-size: 38px;
+      font-weight: 300;
+    }
   }
 
   &.zero {
     width: 144px;
-
     &.animate {
       width: 142px;
     }
   }
 
   &.enter {
-    position: relative;
-    font-size: 26px;
-    line-height: 26px;
-    letter-spacing: 1px;
     width: 224px;
+    .key__content {
+      color: #33cccc;
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      padding-bottom: 4px;
+    }
 
     &.animate {
-      font-size: 25px;
       width: 222px;
     }
   }
 
-  &__start {
+  &__secondary {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #33cccc;
     font-size: 13px;
+    line-height: 13px;
     width: 64px;
     text-align: center;
     padding-top: 26px;

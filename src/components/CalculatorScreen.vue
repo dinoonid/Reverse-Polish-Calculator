@@ -43,13 +43,13 @@ const nextEntry = computed(() => {
 <style scoped lang="scss">
 .screen {
   position: relative;
-  color: hsla(160, 20%, 30%);
+  color: hsla(180, 20%, 30%);
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 1px;
-  background: linear-gradient(210deg, hsl(160, 23%, 90%), hsl(160, 23%, 68%));
-  border: 1px solid hsla(160, 67%, 24%, 0.3);
+  background: linear-gradient(210deg, hsl(180, 23%, 90%), hsl(180, 23%, 68%));
+  border: 1px solid hsla(180, 67%, 24%, 0.3);
   box-shadow: -4px 4px 8px inset rgba(0, 0, 0, 0.3);
   padding: 8px 28px 16px 28px;
 
@@ -62,25 +62,25 @@ const nextEntry = computed(() => {
     display: flex;
     flex-direction: row-reverse;
     gap: 6px;
-    border-bottom: 1px solid hsla(160, 67%, 24%, 0.16);
+    border-bottom: 1px solid hsla(180, 67%, 24%, 0.16);
     padding-bottom: 4px;
     margin-bottom: 12px;
   }
 
   &__dot {
-    background-color: hsla(160, 67%, 24%, 0.1);
+    background-color: hsla(180, 67%, 24%, 0.1);
     width: 6px;
     height: 6px;
     border-radius: 6px;
 
     &.active {
       position: relative;
-      background-color: hsla(160, 26%, 10%, 0.7);
+      background-color: hsla(180, 26%, 10%, 0.7);
     }
   }
 
   &__primary__container {
-    border-top: 1px solid hsla(160, 67%, 24%, 0.16);
+    border-top: 1px solid hsla(180, 67%, 24%, 0.16);
     padding-top: 12px;
 
     &.error .digits ::v-deep(.digit) .digit__bar.active {

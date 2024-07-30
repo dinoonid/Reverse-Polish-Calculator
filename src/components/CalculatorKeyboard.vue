@@ -14,6 +14,7 @@
 
 <script setup>
 import CalculatorKey from '@/components/CalculatorKey.vue'
+import swap from '@/assets/images/swap-arrow.svg'
 
 const emit = defineEmits(['buttonClicked', 'enableCalculator'])
 
@@ -47,7 +48,8 @@ const keyList = [
       key: '↕',
       type: 'option',
       action: 'swap',
-      title: 'Swap'
+      title: 'Swap',
+      icon: swap
     },
     {
       key: '7',
@@ -66,7 +68,7 @@ const keyList = [
     },
     {
       key: '÷',
-      type: 'option',
+      type: 'operator',
       action: 'divide',
       title: 'Divide'
     }
@@ -95,7 +97,7 @@ const keyList = [
     },
     {
       key: '×',
-      type: 'option',
+      type: 'operator',
       action: 'multiply',
       title: 'Multiply'
     }
@@ -124,7 +126,7 @@ const keyList = [
     },
     {
       key: '-',
-      type: 'option',
+      type: 'operator',
       action: 'subtract',
       title: 'Subtract'
     }
@@ -148,7 +150,7 @@ const keyList = [
     },
     {
       key: '+',
-      type: 'option',
+      type: 'operator',
       action: 'add',
       title: 'Add'
     }

@@ -65,14 +65,15 @@ const processDigitClick = (digit) => {
     entry.value = digit
     return
   }
-  if (digit === '0' && entry.value === '0') return
-  if (concatMode.value) {
+
+  if (concatMode.value && entry.value !== '0') {
     if (isEntryUnderLimit()) entry.value = entry.value += digit
   } else {
     if (operationInProgress.value) handleEntryList('add')
     entry.value = digit
-    concatMode.value = true
+    concatMode.value = digit === '0' ? false : true
   }
+
   operationInProgress.value = false
 }
 
