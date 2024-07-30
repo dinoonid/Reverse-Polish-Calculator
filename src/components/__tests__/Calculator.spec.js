@@ -235,6 +235,19 @@ describe('behavior of hasEntryError property', () => {
     expect(instance.hasEntryError).toBe(false)
   })
 
+  it('Should set hasEntryError to true when clicking twice a digit button', () => {
+    const instance = wrapper.vm
+    instance.entry = '99999999999+'
+    instance.entryList = ['20', '40']
+    instance.hasEntryError = true
+    instance.handleButtonClick('5')
+    expect(instance.entry).toBe('5')
+    expect(instance.entryList).toEqual(['20', '40'])
+    expect(instance.hasEntryError).toBe(false)
+    instance.handleButtonClick('8')
+    expect(instance.entry).toBe('58')
+  })
+
   it('Should set hasEntryError to false and reset entry when clicking the (±) button', () => {
     const instance = wrapper.vm
     instance.entry = '99999999999+'

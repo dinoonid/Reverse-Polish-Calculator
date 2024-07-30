@@ -56,16 +56,20 @@ const operations = {
 }
 
 const handleButtonClick = (key) => {
-  if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(key)) processDigitClick(key)
+  const isDigit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(key)
+  if (hasEntryError.value && key !== 'clearall') {
+    reset()
+    if (isDigit) {
+      entry.value = key
+      concatMode.value = true
+    }
+    return
+  }
+  if (isDigit) processDigitClick(key)
   else operations[key]()
 }
 
 const processDigitClick = (digit) => {
-  if (handleEntryError()) {
-    entry.value = digit
-    return
-  }
-
   if (concatMode.value && entry.value !== '0') {
     if (isEntryUnderLimit()) entry.value = entry.value += digit
   } else {
@@ -78,7 +82,6 @@ const processDigitClick = (digit) => {
 }
 
 const processComaClick = () => {
-  if (handleEntryError()) return
   if (entry.value.includes(',')) return
   if (isEntryUnderLimit()) {
     if (operationInProgress.value) {
@@ -100,7 +103,6 @@ const isEntryUnderLimit = () => {
 }
 
 const processEnterClick = () => {
-  if (handleEntryError()) return
   concatMode.value = false
   handleEntryList('add')
 }
@@ -127,16 +129,7 @@ const reset = () => {
   operationInProgress.value = false
 }
 
-const handleEntryError = () => {
-  if (hasEntryError.value) {
-    reset()
-    return true
-  }
-  return false
-}
-
 const processSwap = () => {
-  if (handleEntryError()) return
   if (entryList.value.length > 0) {
     const tempFirstEntryListElement = entryList.value[0]
     handleEntryList('replace')
@@ -145,14 +138,12 @@ const processSwap = () => {
 }
 
 const togglePositiveNegative = () => {
-  if (handleEntryError()) return
   if (entry.value === '0' || entry.value === '0,') return
   if (entry.value[0] === '-') entry.value = entry.value.slice(1)
   else entry.value = `-${entry.value}`
 }
 
 const process = (type) => {
-  if (handleEntryError()) return
   if (entryList.value.length > 0) {
     entry.value = formatResult(safeProcess(entry.value, entryList.value[0], type))
     shiftEntryList()
