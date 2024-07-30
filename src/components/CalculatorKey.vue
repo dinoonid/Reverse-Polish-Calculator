@@ -38,7 +38,7 @@ const handleMouseDown = (action, event) => {
   if (action === 'clearall') {
     holdTimeout = setTimeout(() => {
       isCalculatorActived.value = !isCalculatorActived.value
-      emit('enableCalculator', isCalculatorActived)
+      emit('enableCalculator', isCalculatorActived.value)
     }, 1000)
   }
 }
