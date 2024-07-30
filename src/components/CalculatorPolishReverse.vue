@@ -8,11 +8,6 @@
       </div>
       <div class="calc__wrapper__keyboard">
         <div class="calc__container__keyboard">
-          <img alt="screw" class="calc__container__screw" :src="screw" />
-          <img alt="screw" class="calc__container__screw" :src="screw" />
-          <img alt="screw" class="calc__container__screw" :src="screw" />
-          <img alt="screw" class="calc__container__screw" :src="screw" />
-
           <Keyboard @button-clicked="handleButtonClick" @enable-calculator="enableCalculator" />
         </div>
       </div>
@@ -22,7 +17,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import screw from '@/assets/images/screw.svg'
 import Screen from '@/components/CalculatorScreen.vue'
 import Keyboard from '@/components/CalculatorKeyboard.vue'
 
@@ -247,36 +241,6 @@ const formatResult = (value) => {
         bottom: 0;
         right: 0;
         background: linear-gradient(225deg, #ffffff, hsl(220, 30%, 94%));
-      }
-    }
-
-    &__screw {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-
-      &:nth-child(1) {
-        bottom: 10px;
-        right: 10px;
-        transform: rotate(-45deg);
-      }
-
-      &:nth-child(2) {
-        bottom: 10px;
-        left: 10px;
-        transform: rotate(45deg);
-      }
-
-      &:nth-child(3) {
-        bottom: 419px;
-        left: 10px;
-        transform: rotate(-45deg);
-      }
-
-      &:nth-child(4) {
-        bottom: 419px;
-        right: 10px;
-        transform: rotate(45deg);
       }
     }
   }
