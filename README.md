@@ -1,6 +1,6 @@
 ![Reverse Polish Calculator](assets/reverse_polish_calculator.png)
 
-# calculatrice
+# Calculatrice polonaise inversée
 
 This template should help get you started developing with Vue 3 in Vite.
 
