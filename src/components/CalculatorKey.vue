@@ -11,17 +11,23 @@
     <div class="key__content">
       <img v-if="keyOption.icon" :src="keyOption.icon" />
       <span v-else>{{ keyOption.key }}</span>
-      <span v-if="keyOption.option" class="key__secondary">{{ keyOption.option.key }}</span>
+      <span
+        v-if="keyOption.option"
+        class="key__secondary"
+        :class="{ active: isCalculatorActived }"
+        >{{ keyOption.option.key }}</span
+      >
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 defineProps(['keyOption'])
 const emit = defineEmits(['buttonClicked', 'enableCalculator'])
 
 let holdTimeout
-let isCalculatorActived = false
+let isCalculatorActived = ref(false)
 
 const emitButtonClicked = (key) => {
   emit('buttonClicked', key)
@@ -31,7 +37,7 @@ const handleMouseDown = (action, event) => {
   event.currentTarget.classList.add('animate')
   if (action === 'clearall') {
     holdTimeout = setTimeout(() => {
-      isCalculatorActived = !isCalculatorActived
+      isCalculatorActived.value = !isCalculatorActived.value
       emit('enableCalculator', isCalculatorActived)
     }, 1000)
   }
@@ -83,7 +89,7 @@ const handleMouseUpLeave = (action, event) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #777777;
+    color: #7a8eb8;
     font-size: 28px;
     font-weight: 400;
     line-height: 64px;
@@ -169,12 +175,18 @@ const handleMouseUpLeave = (action, event) => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #33cccc;
+    color: #7a8eb8;
     font-size: 13px;
+    font-weight: 700;
     line-height: 13px;
     width: 64px;
     text-align: center;
+    letter-spacing: 1px;
     padding-top: 26px;
+
+    &.active {
+      color: #33cccc;
+    }
   }
 }
 </style>
