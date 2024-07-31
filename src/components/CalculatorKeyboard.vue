@@ -181,13 +181,11 @@ const emitEnableCalculator = (status) => {
   &::after {
     content: '';
     position: absolute;
-    top: 28px;
+    top: 0;
     left: 110px;
     width: 1px;
-    height: 384px;
-    background-color: #ffffff;
-    border-left: 1px solid hsl(220, 30%, 30%, 0.2);
-    box-sizing: content-box;
+    height: 100%;
+    background-color: hsl(220, 30%, 30%, 0.08);
   }
 
   &::after {

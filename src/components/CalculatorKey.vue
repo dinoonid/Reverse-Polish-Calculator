@@ -55,37 +55,42 @@ const handleMouseUpLeave = (action, event) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(210deg, hsl(220, 30%, 92%) 0%, hsl(220, 30%, 100%) 90%);
+  background: linear-gradient(210deg, hsl(220, 30%, 100%) 0%, hsl(220, 30%, 94%) 90%);
   width: 64px;
   height: 64px;
   border-radius: 64px;
-  border: 1px solid #ffffff;
   transition: all 30ms ease-out;
   box-shadow:
-    0px 0px 0px 2px hsl(220, 30%, 30%, 0.14),
-    -4px 6px 6px 0px hsl(220, 30%, 30%, 0.1);
+    0px 0px 0px 1px hsl(220, 30%, 30%, 0.16),
+    -4px 6px 6px 0px hsl(220, 30%, 30%, 0.08);
   cursor: pointer;
   user-select: none;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    border-radius: 60px;
+    background: linear-gradient(210deg, hsl(220, 30%, 92%) 0%, hsl(220, 30%, 100%) 90%);
+  }
+
   &:first-child {
     margin-right: 20px;
-    &.animate {
-      margin: 0 21px 0 1px;
-    }
   }
 
   &:last-child {
     margin-left: 20px;
-    &.animate {
-      margin: 0 1px 0 21px;
-    }
   }
 
   &:hover {
-    background: hsl(220, 30%, 98%);
+    background: #ffffff;
   }
 
   &__content {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,7 +99,6 @@ const handleMouseUpLeave = (action, event) => {
     font-weight: 400;
     line-height: 64px;
     text-align: center;
-    text-shadow: 0 0 4px #ffffff;
     text-shadow:
       1px -1px 1px #ffffff,
       1px -1px 1px #ffffff,
@@ -107,28 +111,25 @@ const handleMouseUpLeave = (action, event) => {
   }
 
   &.animate {
-    width: 62px;
-    height: 62px;
-    margin: 0 1px;
     box-shadow:
-      0px 0px 0px 2px hsl(220, 30%, 30%, 0.14),
-      -2px 4px 6px 0px hsl(220, 30%, 30%, 0.1);
+      0px 0px 0px 1px hsl(220, 30%, 30%, 0.16),
+      -2px 3px 3px 0px hsl(220, 30%, 30%, 0.08);
 
     .key__content {
-      transform: scale(0.94);
+      transform: scale(0.95);
     }
   }
 
   &.clear {
     .key__content {
-      color: hsl(26, 100%, 60%);
+      color: #ff8b33;
       font-size: 24px;
     }
   }
 
   &.clearall {
     .key__content {
-      color: hsl(26, 100%, 60%);
+      color: #ff8b33;
       font-size: 22px;
       padding-bottom: 9px;
     }
@@ -150,9 +151,6 @@ const handleMouseUpLeave = (action, event) => {
 
   &.zero {
     width: 144px;
-    &.animate {
-      width: 142px;
-    }
   }
 
   &.enter {
@@ -163,10 +161,6 @@ const handleMouseUpLeave = (action, event) => {
       font-weight: 300;
       letter-spacing: 1px;
       padding-bottom: 4px;
-    }
-
-    &.animate {
-      width: 222px;
     }
   }
 
