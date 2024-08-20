@@ -74,7 +74,7 @@ const isKeyAcitive = computed(() => {
 .digit {
   width: 25px;
   height: auto;
-  transform: skewX(-4deg);
+  transform: skewX(-6deg);
 
   &__bar {
     fill: hsla(180, 67%, 24%, 0.1);
